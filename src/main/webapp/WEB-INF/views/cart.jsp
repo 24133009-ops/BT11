@@ -116,7 +116,7 @@
     </h2>
 
     <c:choose>
-        <c:when test="${empty sessionScope.cart || sessionScope.cart.empty}">
+        <c:when test="${empty sessionScope.cart || empty sessionScope.cart.items}">
             <div class="cart-card text-center py-5">
                 <i class="bi bi-cart-x text-muted" style="font-size: 4rem;"></i>
                 <h4 class="mt-3 fw-bold text-dark">Giỏ hàng của bạn đang trống!</h4>
