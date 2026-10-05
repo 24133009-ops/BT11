@@ -309,14 +309,14 @@ GO
 -- 8. Đơn hàng hoàn
 -- ============================================
 INSERT INTO orders (user_id, fullname, phone, address, note, total_price, payment_method, status, order_date) VALUES
-    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Giao giờ hành chính', 82000,  'COD', N'Đơn hàng mới',   GETDATE()),
-    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Gọi trước khi giao',  180000, 'COD', N'Đã xác nhận',    DATEADD(day, -1, GETDATE())),
-    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'',                    45000,  'COD', N'Chuẩn bị hàng',  DATEADD(day, -2, GETDATE())),
-    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'',                    55000,  'COD', N'Vận chuyển',     DATEADD(day, -3, GETDATE())),
-    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Giao tận tay',        60000,  'COD', N'Giao hàng',       DATEADD(day, -4, GETDATE())),
-    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Đã nhận sách tốt',   149000, 'COD', N'Đã giao',        DATEADD(day, -5, GETDATE())),
-    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Khách đổi ý',         90000,  'COD', N'Đơn hàng hủy',   DATEADD(day, -6, GETDATE())),
-    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Bị rách bìa',         79000,  'COD', N'Đơn hàng hoàn',  DATEADD(day, -7, GETDATE()));
+    (1, N'Trương Quốc Duy',     '0912345678', N'Số 484 Lê Văn Việt, Phường Tăng Nhơn Phú A, TP. Thủ Đức, TP.HCM', N'Giao giờ hành chính, gọi trước khi đến', 82000,  N'Thanh toán khi nhận hàng (COD)', N'Đơn hàng mới',   GETDATE()),
+    (1, N'Nguyễn Hoàng Nam',    '0988123456', N'Số 12 Đinh Tiên Hoàng, Phường Đa Kao, Quận 1, TP.HCM',       N'Gửi phòng bảo vệ tòa nhà nếu vắng mặt',     180000, N'Chuyển khoản VNPAY',             N'Đã xác nhận',    DATEADD(day, -1, GETDATE())),
+    (1, N'Lê Thị Mai Anh',      '0903987654', N'Tòa Landmark 81, 720A Điện Biên Phủ, Phường 22, Bình Thạnh', N'Đóng gói cẩn thận bọc chống sốc',            45000,  N'Ví điện tử MoMo',                 N'Chuẩn bị hàng',  DATEADD(day, -2, GETDATE())),
+    (1, N'Phạm Minh Quân',      '0977654321', N'Số 268 Lý Thường Kiệt, Phường 14, Quận 10, TP.HCM',          N'Giao trước 11h trưa',                       55000,  N'Thanh toán khi nhận hàng (COD)', N'Vận chuyển',     DATEADD(day, -3, GETDATE())),
+    (1, N'Trần Thị Lan',        '0905123456', N'Số 1 Võ Văn Ngân, Phường Linh Chiểu, TP. Thủ Đức, TP.HCM',   N'Giao hàng tận tay người nhận',              60000,  N'Ví ZaloPay',                      N'Giao hàng',       DATEADD(day, -4, GETDATE())),
+    (1, N'Đặng Thanh Thảo',     '0918765432', N'Số 136 Xuân Thủy, Dịch Vọng Hậu, Quận Cầu Giấy, Hà Nội',     N'Đã trả trước qua thẻ, chỉ giao nhận',      149000, N'Thẻ tín dụng Visa/Mastercard',    N'Đã giao',        DATEADD(day, -5, GETDATE())),
+    (1, N'Hoàng Văn Khang',     '0933221144', N'Số 88 Hai Bà Trưng, Phường Tràng Tiền, Quận Hoàn Kiếm, HN', N'Khách bận công tác đột xuất nên hủy',       90000,  N'Thanh toán khi nhận hàng (COD)', N'Đơn hàng hủy',   DATEADD(day, -6, GETDATE())),
+    (1, N'Vũ Diệu Linh',        '0966554433', N'Số 15 Pasteur, Phường Hải Châu 1, Quận Hải Châu, Đà Nẵng',    N'Sách bị cấn bìa do vận chuyển, hoàn đổi',   79000,  N'Thẻ ATM nội địa (Napas)',         N'Đơn hàng hoàn',  DATEADD(day, -7, GETDATE()));
 GO
 
 INSERT INTO order_items (order_id, book_id, quantity, price) VALUES

@@ -53,15 +53,15 @@ public class UserService_24133009 {
         return userRepo.findByEmail(email.trim()) != null;
     }
 
+    public User_24133009 getUserById(int id) {
+        return userRepo.findById(id);
+    }
+
     public void registerUser(User_24133009 user) {
         user.setSignupDate(new Date());
         if (user.getIsAdmin() == null) {
             user.setIsAdmin(false);
         }
         userRepo.save(user);
-    }
-
-    public User_24133009 getUserById(int id) {
-        return userRepo.findById(id);
     }
 }
