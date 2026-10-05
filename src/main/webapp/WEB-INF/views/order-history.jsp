@@ -99,13 +99,24 @@
         </ol>
     </nav>
 
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
         <h2 class="fw-bold mb-0" style="color: #0f172a;">
-            <i class="bi bi-clock-history text-warning me-2"></i>Lịch Sử Đặt Hàng
+            <i class="bi bi-clock-history text-warning me-2"></i>Lịch Sử Đặt Hàng (8 Trạng Thái)
         </h2>
         <span class="badge bg-light text-dark border px-3 py-2">
             Tài khoản: <strong>${sessionScope.user.fullname != null ? sessionScope.user.fullname : sessionScope.user.email}</strong>
         </span>
+    </div>
+
+    <!-- Alert hướng dẫn 8 trạng thái theo đề bài -->
+    <div class="alert alert-warning py-2 px-3 small d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3 border-warning">
+        <div>
+            <i class="bi bi-shield-check text-warning me-1 fs-6"></i>
+            <strong>8 Trạng thái theo yêu cầu:</strong>
+            <span class="text-dark">1. Đơn hàng mới | 2. Đã xác nhận | 3. Chuẩn bị hàng | 4. Vận chuyển | 5. Giao hàng | 6. Đã giao | 7. Đơn hàng hủy | 8. Đơn hàng hoàn.</span>
+            <br class="d-md-none">
+            <span class="text-muted fst-italic ms-md-2">(Vào database đổi cột <code>status</code> bảng <code>orders</code> hoặc dùng menu/tabs lọc để kiểm tra)</span>
+        </div>
     </div>
 
     <!-- Filter Tabs (8 Trạng thái theo yêu cầu đề bài) -->
@@ -180,7 +191,7 @@
                                 Ngày đặt: <fmt:formatDate value="${ord.orderDate}" pattern="dd/MM/yyyy HH:mm"/>
                             </span>
                         </div>
-                        <div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
                             <!-- Badge Trạng thái tương ứng -->
                             <c:choose>
                                 <c:when test="${ord.status == 'Đơn hàng mới'}">
@@ -211,6 +222,25 @@
                                     <span class="badge bg-secondary px-3 py-2">${ord.status}</span>
                                 </c:otherwise>
                             </c:choose>
+
+                            <!-- Tool test chuyển nhanh 8 trạng thái cho Admin / Giảng viên chấm bài -->
+                            <c:if test="${sessionScope.user.isAdmin}">
+                                <form action="${pageContext.request.contextPath}/orders" method="post" class="d-inline-flex align-items-center gap-1 ms-2">
+                                    <input type="hidden" name="orderId" value="${ord.orderId}"/>
+                                    <input type="hidden" name="redirectUrl" value="${pageContext.request.contextPath}/orders?status=${currentStatus}"/>
+                                    <select name="newStatus" class="form-select form-select-sm" style="font-size: 0.78rem; padding: 2px 8px; width: auto;" onchange="this.form.submit()">
+                                        <option value="" disabled selected>⚡ Đổi trạng thái (Admin)...</option>
+                                        <option value="Đơn hàng mới" ${ord.status == 'Đơn hàng mới' ? 'selected' : ''}>1. Đơn hàng mới</option>
+                                        <option value="Đã xác nhận" ${ord.status == 'Đã xác nhận' ? 'selected' : ''}>2. Đã xác nhận</option>
+                                        <option value="Chuẩn bị hàng" ${ord.status == 'Chuẩn bị hàng' ? 'selected' : ''}>3. Chuẩn bị hàng</option>
+                                        <option value="Vận chuyển" ${ord.status == 'Vận chuyển' ? 'selected' : ''}>4. Vận chuyển</option>
+                                        <option value="Giao hàng" ${ord.status == 'Giao hàng' ? 'selected' : ''}>5. Giao hàng</option>
+                                        <option value="Đã giao" ${ord.status == 'Đã giao' ? 'selected' : ''}>6. Đã giao</option>
+                                        <option value="Đơn hàng hủy" ${ord.status == 'Đơn hàng hủy' ? 'selected' : ''}>7. Đơn hàng hủy</option>
+                                        <option value="Đơn hàng hoàn" ${ord.status == 'Đơn hàng hoàn' ? 'selected' : ''}>8. Đơn hàng hoàn</option>
+                                    </select>
+                                </form>
+                            </c:if>
                         </div>
                     </div>
 

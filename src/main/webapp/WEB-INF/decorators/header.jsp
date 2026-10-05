@@ -21,6 +21,33 @@
                         <i class="bi bi-grid me-1"></i>Sản phẩm
                     </a>
                 </li>
+                <!-- Mục chính: Đơn hàng (8 trạng thái yêu cầu) -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-warning fw-semibold" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-box-seam-fill me-1"></i>Đơn hàng (8 trạng thái)
+                    </a>
+                    <ul class="dropdown-menu shadow">
+                        <li class="dropdown-header text-uppercase fw-bold text-muted small">
+                            <i class="bi bi-funnel-fill me-1 text-warning"></i>Lọc 8 Trạng Thái
+                        </li>
+                        <li><a class="dropdown-item fw-bold" href="${pageContext.request.contextPath}/orders?status=ALL">
+                            <i class="bi bi-collection-fill me-2 text-primary"></i>Tất cả đơn hàng
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders?status=Đơn hàng mới">1. Đơn hàng mới</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders?status=Đã xác nhận">2. Đã xác nhận</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders?status=Chuẩn bị hàng">3. Chuẩn bị hàng</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders?status=Vận chuyển">4. Vận chuyển</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders?status=Giao hàng">5. Giao hàng</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders?status=Đã giao">6. Đã giao</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders?status=Đơn hàng hủy">7. Đơn hàng hủy</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders?status=Đơn hàng hoàn">8. Đơn hàng hoàn</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center fw-bold text-warning bg-dark rounded mx-2 py-2" href="${pageContext.request.contextPath}/orders">
+                            <i class="bi bi-clock-history me-1"></i>Xem trang Đơn Hàng
+                        </a></li>
+                    </ul>
+                </li>
                 <!-- Trang quản trị: chỉ Admin mới thấy chức năng này -->
                 <c:if test="${not empty sessionScope.user && sessionScope.user.isAdmin}">
                     <li class="nav-item">

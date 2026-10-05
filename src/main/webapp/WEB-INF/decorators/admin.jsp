@@ -57,6 +57,11 @@
                             <i class="bi bi-people me-1"></i>Quản lý Tác giả
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning fw-bold" href="${pageContext.request.contextPath}/orders">
+                            <i class="bi bi-box-seam me-1"></i>Quản lý Đơn hàng (8 trạng thái)
+                        </a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item me-3 text-light">

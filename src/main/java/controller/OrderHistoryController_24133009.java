@@ -21,6 +21,8 @@ public class OrderHistoryController_24133009 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         User_24133009 user = (User_24133009) session.getAttribute("user");
 
@@ -56,5 +58,32 @@ public class OrderHistoryController_24133009 extends HttpServlet {
         request.setAttribute("orders", orders);
         request.setAttribute("currentStatus", currentStatus);
         request.getRequestDispatcher("/WEB-INF/views/order-history.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        User_24133009 user = (User_24133009) session.getAttribute("user");
+
+        if (user != null && Boolean.TRUE.equals(user.getIsAdmin())) {
+            String orderIdStr = request.getParameter("orderId");
+            String newStatus = request.getParameter("newStatus");
+            if (orderIdStr != null && newStatus != null) {
+                try {
+                    int orderId = Integer.parseInt(orderIdStr.trim());
+                    orderService.updateOrderStatus(orderId, newStatus.trim());
+                } catch (Exception ignored) {}
+            }
+        }
+
+        String redirectUrl = request.getParameter("redirectUrl");
+        if (redirectUrl != null && !redirectUrl.isEmpty()) {
+            response.sendRedirect(redirectUrl);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/orders");
+        }
     }
 }

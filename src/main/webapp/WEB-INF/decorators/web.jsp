@@ -309,9 +309,70 @@
                 <li><a href="${pageContext.request.contextPath}/home">
                     <i class="bi bi-house me-1"></i>Trang Chủ
                 </a></li>
-                <li><a href="${pageContext.request.contextPath}/home">
+                <li><a href="${pageContext.request.contextPath}/home#books-grid-section">
                     <i class="bi bi-grid me-1"></i>Sản phẩm
                 </a></li>
+
+                <!-- Mục chính: Giỏ hàng -->
+                <li>
+                    <a href="${pageContext.request.contextPath}/cart" class="position-relative">
+                        <i class="bi bi-cart3 me-1 text-warning"></i>Giỏ hàng
+                        <c:if test="${not empty sessionScope.cart && sessionScope.cart.totalQuantity > 0}">
+                            <span class="badge rounded-pill bg-danger ms-1" style="font-size: 0.72rem; vertical-align: middle;">
+                                ${sessionScope.cart.totalQuantity}
+                            </span>
+                        </c:if>
+                    </a>
+                </li>
+
+                <!-- Mục chính: Đơn hàng (8 Yêu cầu trạng thái đề bài) -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false"
+                       style="color: #fbbf24 !important; font-weight: 700; padding: 6px 14px; border-radius: 8px; background: rgba(245, 158, 11, 0.18); border: 1.5px solid rgba(245, 158, 11, 0.5);">
+                        <i class="bi bi-box-seam-fill me-1 text-warning"></i>Đơn hàng (8 trạng thái)
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="min-width: 260px; border-radius: 12px; padding: 10px; border: 1px solid rgba(0,0,0,0.1);">
+                        <li class="dropdown-header text-uppercase fw-bold text-muted small pb-2">
+                            <i class="bi bi-funnel-fill me-1 text-warning"></i>Lọc 8 Trạng Thái (Đề bài yêu cầu)
+                        </li>
+                        <li>
+                            <a class="dropdown-item fw-bold py-2 text-dark" href="${pageContext.request.contextPath}/orders?status=ALL">
+                                <i class="bi bi-collection-fill me-2 text-primary"></i>Tất cả đơn hàng
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider my-1"></li>
+                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đơn hàng mới">
+                            <span class="badge bg-info text-dark me-2">1</span>Đơn hàng mới
+                        </a></li>
+                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đã xác nhận">
+                            <span class="badge bg-primary me-2">2</span>Đã xác nhận
+                        </a></li>
+                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Chuẩn bị hàng">
+                            <span class="badge bg-warning text-dark me-2">3</span>Chuẩn bị hàng
+                        </a></li>
+                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Vận chuyển">
+                            <span class="badge bg-warning text-dark me-2">4</span>Vận chuyển
+                        </a></li>
+                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Giao hàng">
+                            <span class="badge bg-success me-2">5</span>Giao hàng
+                        </a></li>
+                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đã giao">
+                            <span class="badge bg-success me-2">6</span>Đã giao
+                        </a></li>
+                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đơn hàng hủy">
+                            <span class="badge bg-danger me-2">7</span>Đơn hàng hủy
+                        </a></li>
+                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đơn hàng hoàn">
+                            <span class="badge bg-secondary me-2">8</span>Đơn hàng hoàn
+                        </a></li>
+                        <li><hr class="dropdown-divider my-2"></li>
+                        <li>
+                            <a class="dropdown-item text-center fw-bold text-dark py-2 rounded" style="background:#fbbf24;" href="${pageContext.request.contextPath}/orders">
+                                <i class="bi bi-clock-history me-1"></i>Vào Trang Lịch Sử Đặt Hàng
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
                 <c:choose>
                     <c:when test="${not empty sessionScope.user}">
@@ -329,15 +390,26 @@
                                 ${not empty sessionScope.user.fullname ? sessionScope.user.fullname : sessionScope.user.email}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item text-warning fw-semibold" href="${pageContext.request.contextPath}/orders">
+                                        <i class="bi bi-box-seam me-2"></i>Lịch sử đặt hàng (8 trạng thái)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cart">
+                                        <i class="bi bi-cart3 me-2 text-info"></i>Giỏ hàng của tôi
+                                    </a>
+                                </li>
                                 <c:if test="${sessionScope.user.isAdmin}">
+                                    <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/books">
                                         <i class="bi bi-speedometer2 me-2 text-warning"></i>Quản lý Sách
                                     </a></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/authors">
                                         <i class="bi bi-people me-2 text-info"></i>Quản lý Tác giả
                                     </a></li>
-                                    <li><hr class="dropdown-divider"></li>
                                 </c:if>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout">
                                     <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
                                 </a></li>
@@ -370,6 +442,11 @@
             <li><a href="${pageContext.request.contextPath}/home">Khoa học</a></li>
             <li><a href="${pageContext.request.contextPath}/home">Kỹ năng sống</a></li>
             <li><a href="${pageContext.request.contextPath}/home"><i class="bi bi-tag me-1"></i>Ưu đãi</a></li>
+            <li class="ms-auto">
+                <a href="${pageContext.request.contextPath}/orders" style="color:var(--accent); font-weight:700;">
+                    <i class="bi bi-box-seam me-1"></i>Mục Đơn Hàng (8 Trạng Thái)
+                </a>
+            </li>
         </ul>
     </div>
 </div>

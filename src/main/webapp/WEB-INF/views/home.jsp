@@ -539,8 +539,8 @@ body {
                     <a href="#books-grid-section" class="btn-gold">
                         <i class="bi bi-book-half"></i> Khám phá ngay
                     </a>
-                    <a href="#books-grid-section" class="btn-outline-light-custom">
-                        <i class="bi bi-fire"></i> Bán chạy nhất
+                    <a href="${pageContext.request.contextPath}/orders" class="btn-outline-light-custom">
+                        <i class="bi bi-box-seam text-warning"></i> Quản lý Đơn hàng (8 trạng thái)
                     </a>
                 </div>
                 <div class="hero-stats">
@@ -600,6 +600,87 @@ body {
         </div>
     </div>
 </div>
+
+<!-- ==================== LOGGED-IN USER ORDER DASHBOARD (8 YÊU CẦU TRẠNG THÁI) ==================== -->
+<c:if test="${not empty sessionScope.user}">
+    <div class="container my-4">
+        <div class="card shadow border-0" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 16px; border: 1.5px solid rgba(245, 158, 11, 0.45) !important;">
+            <div class="card-body p-4 text-white">
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 pb-3 border-bottom border-secondary">
+                    <div class="d-flex align-items-center gap-3">
+                        <div style="width: 52px; height: 52px; border-radius: 12px; background: rgba(245, 158, 11, 0.2); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: #fbbf24;">
+                            <i class="bi bi-box-seam-fill"></i>
+                        </div>
+                        <div>
+                            <div class="badge bg-warning text-dark fw-bold mb-1">
+                                <i class="bi bi-stars me-1"></i>MỤC CHÍNH - QUẢN LÝ ĐƠN HÀNG (8 TRẠNG THÁI)
+                            </div>
+                            <h4 class="fw-bold mb-0 text-white">
+                                Xin chào, <span style="color: #fbbf24;">${sessionScope.user.fullname != null ? sessionScope.user.fullname : sessionScope.user.email}</span>!
+                            </h4>
+                            <small class="text-light opacity-75">
+                                Theo dõi trạng thái đơn hàng của bạn theo thời gian thực (8 trạng thái yêu cầu đề bài)
+                            </small>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="${pageContext.request.contextPath}/orders" class="btn btn-warning fw-bold px-3 py-2 shadow-sm">
+                            <i class="bi bi-clock-history me-1"></i> Vào Trang Quản Lý Đơn Hàng
+                        </a>
+                        <a href="${pageContext.request.contextPath}/cart" class="btn btn-outline-light fw-semibold px-3 py-2">
+                            <i class="bi bi-cart3 me-1"></i> Giỏ hàng (${sessionScope.cart != null ? sessionScope.cart.totalQuantity : 0})
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 8 Trạng thái pills filter -->
+                <div>
+                    <div class="fw-semibold text-warning small mb-2 text-uppercase" style="letter-spacing: 0.5px;">
+                        <i class="bi bi-funnel-fill me-1"></i> Bấm để lọc trực tiếp 8 trạng thái (Đề bài yêu cầu):
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="${pageContext.request.contextPath}/orders?status=ALL"
+                           class="badge bg-dark border border-secondary text-decoration-none py-2 px-3 fs-6 text-light">
+                            <i class="bi bi-grid-fill me-1"></i> Tất cả
+                        </a>
+                        <a href="${pageContext.request.contextPath}/orders?status=Đơn hàng mới"
+                           class="badge bg-info bg-opacity-25 text-info border border-info text-decoration-none py-2 px-3 fs-6">
+                            <i class="bi bi-asterisk me-1"></i> 1. Đơn hàng mới
+                        </a>
+                        <a href="${pageContext.request.contextPath}/orders?status=Đã xác nhận"
+                           class="badge bg-primary bg-opacity-25 text-primary border border-primary text-decoration-none py-2 px-3 fs-6">
+                            <i class="bi bi-check2-circle me-1"></i> 2. Đã xác nhận
+                        </a>
+                        <a href="${pageContext.request.contextPath}/orders?status=Chuẩn bị hàng"
+                           class="badge bg-warning bg-opacity-25 text-warning border border-warning text-decoration-none py-2 px-3 fs-6">
+                            <i class="bi bi-box-seam me-1"></i> 3. Chuẩn bị hàng
+                        </a>
+                        <a href="${pageContext.request.contextPath}/orders?status=Vận chuyển"
+                           class="badge bg-warning bg-opacity-25 text-warning border border-warning text-decoration-none py-2 px-3 fs-6">
+                            <i class="bi bi-truck me-1"></i> 4. Vận chuyển
+                        </a>
+                        <a href="${pageContext.request.contextPath}/orders?status=Giao hàng"
+                           class="badge bg-success bg-opacity-25 text-success border border-success text-decoration-none py-2 px-3 fs-6">
+                            <i class="bi bi-bicycle me-1"></i> 5. Giao hàng
+                        </a>
+                        <a href="${pageContext.request.contextPath}/orders?status=Đã giao"
+                           class="badge bg-success bg-opacity-25 text-success border border-success text-decoration-none py-2 px-3 fs-6">
+                            <i class="bi bi-patch-check-fill me-1"></i> 6. Đã giao
+                        </a>
+                        <a href="${pageContext.request.contextPath}/orders?status=Đơn hàng hủy"
+                           class="badge bg-danger bg-opacity-25 text-danger border border-danger text-decoration-none py-2 px-3 fs-6">
+                            <i class="bi bi-x-circle me-1"></i> 7. Đơn hàng hủy
+                        </a>
+                        <a href="${pageContext.request.contextPath}/orders?status=Đơn hàng hoàn"
+                           class="badge bg-secondary bg-opacity-25 text-light border border-secondary text-decoration-none py-2 px-3 fs-6">
+                            <i class="bi bi-arrow-return-left me-1"></i> 8. Đơn hàng hoàn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 
 <!-- ==================== TRUST STRIP ==================== -->
 <div class="trust-strip">
