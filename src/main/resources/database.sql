@@ -303,7 +303,7 @@ GO
 -- 7. Đơn hàng hủy
 -- 8. Đơn hàng hoàn
 -- ============================================
-INSERT INTO orders (user_id, fullname, phone, address, note, total_price, payment_method, status, orderDate) VALUES
+INSERT INTO orders (user_id, fullname, phone, address, note, total_price, payment_method, status, order_date) VALUES
     (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Giao giờ hành chính', 82000,  'COD', N'Đơn hàng mới',   GETDATE()),
     (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Gọi trước khi giao',  180000, 'COD', N'Đã xác nhận',    DATEADD(day, -1, GETDATE())),
     (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'',                    45000,  'COD', N'Chuẩn bị hàng',  DATEADD(day, -2, GETDATE())),
