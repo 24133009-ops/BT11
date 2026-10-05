@@ -13,7 +13,7 @@
 
 <br/>
 
-**DỰ ÁN BÀI TẬP LỚN / BÀI TẬP THỰC HÀNH - ĐỀ SỐ 1**  
+**DỰ ÁN BÀI TẬP 11 / BÀI TẬP THỰC HÀNH - ĐỀ SỐ 1**  
 **Học phần:** Lập trình Web với Java (Java Web Application)  
 **Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE)**
 
@@ -323,65 +323,6 @@ erDiagram
 > Khi đăng ký tài khoản mới qua form Đăng ký, hệ thống sẽ tự động phát sinh mã OTP 6 số và gửi qua email. Đồng thời, mã này cũng được in ra **Console / Terminal của Server** để thuận tiện chấm thi trong môi trường offline.
 
 ---
-
-## 🚀 Hướng Dẫn Cài Đặt & Triển Khai (Setup Guide)
-
-### 1. Yêu Cầu Môi Trường
-* **JDK:** Phiên bản 8, 11, 17 hoặc 21.
-* **Apache Tomcat:** Phiên bản 9.0.x (khuyến nghị cho Servlet 4.0 / Java EE `javax.*`).
-* **Hệ quản trị CSDL:** Microsoft SQL Server 2014 trở lên.
-* **IDE:** IntelliJ IDEA (Ultimate / Community với plugin Smart Tomcat) hoặc Eclipse Enterprise.
-* **Maven:** Đã tích hợp sẵn trong IDE hoặc cài đặt phiên bản 3.6 trở lên.
-
----
-
-### 2. Các Bước Thực Hiện
-
-#### Bước 1: Clone kho mã nguồn về máy tính
-```bash
-git clone https://github.com/24133009-ops/BT11.git
-cd BT11
-```
-
-#### Bước 2: Tạo Cơ Sở Dữ Liệu SQL Server
-1. Mở **SQL Server Management Studio (SSMS)**.
-2. Tạo mới một database có tên: `BookStore`:
-   ```sql
-   CREATE DATABASE BookStore;
-   GO
-   ```
-3. Mở và thực thi toàn bộ script tại tệp: `src/main/resources/database.sql`.
-   *(Script sẽ tự động tạo bảng, các khóa ngoại và nạp sẵn 20 đầu sách thật, tác giả, đánh giá cùng 8 đơn hàng mẫu đại diện cho 8 trạng thái)*.
-
-#### Bước 3: Cấu hình kết nối cơ sở dữ liệu
-Mở tệp `src/main/resources/META-INF/persistence.xml` và điều chỉnh lại thông số kết nối phù hợp với máy của bạn:
-
-```xml
-<!-- Địa chỉ máy chủ SQL Server và tên Database -->
-<property name="javax.persistence.jdbc.url"
-          value="jdbc:sqlserver://localhost:1433;databaseName=BookStore;encrypt=false;trustServerCertificate=true"/>
-
-<!-- Tên đăng nhập và mật khẩu tài khoản SQL Server -->
-<property name="javax.persistence.jdbc.user" value="sa"/>
-<property name="javax.persistence.jdbc.password" value="your_password_here"/>
-```
-
-#### Bước 4: Cấu hình và chạy ứng dụng trên Tomcat (IntelliJ IDEA)
-1. Trong IntelliJ IDEA, cài đặt plugin **Smart Tomcat** (nếu chưa có).
-2. Vào **Run/Debug Configurations** -> Thêm cấu hình mới **Smart Tomcat**:
-   * **Tomcat Server:** Chọn thư mục cài đặt Tomcat 9.x trên máy bạn.
-   * **Deployment Directory:** Trỏ đến thư mục `src/main/webapp`.
-   * **Context Path:** Đặt là `/` hoặc `/Truong_Quoc_Duy-24133009`.
-   * **Port:** Mặc định `8080`.
-3. Bấm **Apply** và nhấn nút **Run** (Shift + F10).
-4. Mở trình duyệt và truy cập:
-   ```text
-   http://localhost:8080/home
-   ```
-   *(hoặc `http://localhost:8080/Truong_Quoc_Duy-24133009/home` tùy thuộc Context Path bạn chọn)*.
-
----
-
 ## 🧪 Hướng Dẫn Kiểm Thử Đầy Đủ 8 Trạng Thái Đơn Hàng
 
 Đề bài yêu cầu hệ thống phải hỗ trợ và thể hiện rõ ràng quy trình 8 trạng thái đơn hàng:
@@ -397,9 +338,6 @@ Mở tệp `src/main/resources/META-INF/persistence.xml` và điều chỉnh l�
    - `Đơn hàng hủy`
    - `Đơn hàng hoàn`
 4. Đối với tài khoản **Admin**, tại trang danh sách đơn hàng hoặc chi tiết đơn hàng có thể cập nhật trạng thái đơn hàng sang trạng thái kế tiếp theo chu trình mua bán thực tế.
-
----
-
 ## 📄 Bản Quyền & Giấy Phép (License)
 
 Dự án được xây dựng phục vụ mục đích học tập và báo cáo đồ án môn học tại **Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE)**.
