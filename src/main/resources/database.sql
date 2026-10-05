@@ -104,12 +104,16 @@ GO
 -- ============================================
 -- XÓA DỮ LIỆU CŨ
 -- ============================================
+DELETE FROM order_items;
+DELETE FROM orders;
 DELETE FROM rating;
 DELETE FROM book_author;
 DELETE FROM books;
 DELETE FROM author;
 DELETE FROM users;
 
+DBCC CHECKIDENT ('order_items', RESEED, 0);
+DBCC CHECKIDENT ('orders', RESEED, 0);
 DBCC CHECKIDENT ('books',  RESEED, 0);
 DBCC CHECKIDENT ('author', RESEED, 0);
 DBCC CHECKIDENT ('users',  RESEED, 0);
@@ -125,24 +129,25 @@ INSERT INTO users (email, fullname, phone, passwd, signup_date, is_admin) VALUES
 GO
 
 -- ============================================
--- AUTHORS  (data thật từ Fahasa)
+-- AUTHORS  (Chuẩn xác theo sách thực tế)
 -- ============================================
 INSERT INTO author (author_name, date_of_birth) VALUES
-    (N'Nguyễn Nhật Ánh',   '1955-05-07'),  -- 1
-    (N'Nam Cao',            '1917-10-29'),  -- 2
-    (N'Tô Hoài',            '1920-09-27'),  -- 3
-    (N'Ngô Tất Tố',         '1893-10-01'),  -- 4
-    (N'Vũ Trọng Phụng',     '1912-10-01'),  -- 5
-    (N'J.K. Rowling',       '1965-07-31'),  -- 6
-    (N'Yuval Noah Harari',  '1976-02-24'),  -- 7
-    (N'Dale Carnegie',      '1888-11-24'),  -- 8
-    (N'Paulo Coelho',       '1947-08-24'),  -- 9
-    (N'Nguyễn Ngọc',        '1932-09-05'),  -- 10
-    (N'Trung Trung Đỉnh',   '1949-01-01'),  -- 11
-    (N'Mark Manson',        '1984-03-09'),  -- 12
-    (N'James Clear',        '1986-01-01'),  -- 13
-    (N'Robin Sharma',       '1964-06-16'),  -- 14
-    (N'Nguyễn Tuân',        '1910-07-10');  -- 15
+    (N'Nguyễn Nhật Ánh',          '1955-05-07'),  -- 1
+    (N'Nam Cao',                   '1917-10-29'),  -- 2
+    (N'Tô Hoài',                   '1920-09-27'),  -- 3
+    (N'Ngô Tất Tố',                '1893-10-01'),  -- 4
+    (N'Vũ Trọng Phụng',            '1912-10-01'),  -- 5
+    (N'J.K. Rowling',              '1965-07-31'),  -- 6
+    (N'Yuval Noah Harari',         '1976-02-24'),  -- 7
+    (N'Dale Carnegie',             '1888-11-24'),  -- 8
+    (N'Paulo Coelho',              '1947-08-24'),  -- 9
+    (N'Daniel Kahneman',           '1934-03-05'),  -- 10 (Nobel Kinh tế - Tư duy nhanh và chậm)
+    (N'Mark Manson',               '1984-03-09'),  -- 11 (Nghệ thuật tinh tế của việc không quan tâm)
+    (N'James Clear',               '1986-01-01'),  -- 12 (Atomic Habits)
+    (N'Robin Sharma',              '1964-06-16'),  -- 13 (Nhà sư và chiếc Ferrari)
+    (N'Homer',                     '0800-01-01'),  -- 14 (Sử thi Iliad)
+    (N'Phùng Quán',                '1932-01-01'),  -- 15 (Tuổi thơ dữ dội)
+    (N'Hiếu Minh - Huyền Trang',   '1980-01-01');  -- 16 (Lược sử nước Việt bằng tranh)
 GO
 
 -- ============================================
@@ -267,15 +272,15 @@ INSERT INTO book_author (bookid, author_id) VALUES
     (9,  7),  -- Sapiens -> Yuval Noah Harari
     (10, 8),  -- Đắc nhân tâm -> Dale Carnegie
     (11, 9),  -- Nhà giả kim -> Paulo Coelho
-    (12, 13), -- Atomic Habits -> James Clear
-    (13, 7),  -- Tư duy nhanh và chậm -> Yuval Noah Harari
-    (14, 12), -- Nghệ thuật tinh tế -> Mark Manson
-    (15, 14), -- Nhà sư Ferrari -> Robin Sharma
+    (12, 12), -- Atomic Habits -> James Clear
+    (13, 10), -- Tư duy nhanh và chậm -> Daniel Kahneman
+    (14, 11), -- Nghệ thuật tinh tế -> Mark Manson
+    (15, 13), -- Nhà sư Ferrari -> Robin Sharma
     (16, 4),  -- Tắt đèn -> Ngô Tất Tố
-    (17, 1),  -- Lược sử nước Việt -> Nguyễn Nhật Ánh
+    (17, 16), -- Lược sử nước Việt -> Hiếu Minh - Huyền Trang
     (18, 1),  -- Bồ câu -> Nguyễn Nhật Ánh
-    (19, 6),  -- Iliad -> Homer (dùng J.K. Rowling ID tạm)
-    (20, 2);  -- Tuổi thơ dữ dội -> Nam Cao
+    (19, 14), -- Iliad -> Homer
+    (20, 15); -- Tuổi thơ dữ dội -> Phùng Quán
 GO
 
 -- ============================================
