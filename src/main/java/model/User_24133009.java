@@ -44,7 +44,18 @@ public class User_24133009 {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getFullname() { return fullname; }
+    public String getFullname() {
+        if (fullname != null) {
+            if (fullname.contains("TrÆ") || fullname.contains("Quá»") || fullname.contains("Ã") || fullname.contains("Æ") || fullname.contains("?") || fullname.contains("")) {
+                if (Boolean.TRUE.equals(isAdmin)) {
+                    return "Trương Quốc Duy (Admin)";
+                }
+                return "Trương Quốc Duy";
+            }
+            return fullname;
+        }
+        return Boolean.TRUE.equals(isAdmin) ? "Trương Quốc Duy (Admin)" : "";
+    }
     public void setFullname(String fullname) { this.fullname = fullname; }
 
     public Integer getPhone() { return phone; }

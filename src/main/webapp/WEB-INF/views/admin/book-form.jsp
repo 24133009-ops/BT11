@@ -153,7 +153,7 @@
                                 <c:choose>
                                     <c:when test="${not empty book.coverImage}">
                                         <img id="previewImg"
-                                             src="${pageContext.request.contextPath}/images/books/${book.coverImage}"
+                                             src="${pageContext.request.contextPath}/images/books/${book.coverImage}?v=20261005"
                                              class="preview-img img-thumbnail"
                                              alt="Cover"
                                              onerror="this.src='https://via.placeholder.com/150x200?text=No+Image'">

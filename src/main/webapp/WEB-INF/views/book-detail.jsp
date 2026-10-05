@@ -318,7 +318,7 @@
                     <div class="book-3d-detail">
                         <div class="book-detail-spine"></div>
                         <div class="book-detail-cover">
-                            <c:set var="cImg" value="${fn:startsWith(book.coverImage,'http') ? book.coverImage : pageContext.request.contextPath.concat('/images/books/').concat(book.coverImage)}"/>
+                            <c:set var="cImg" value="${fn:startsWith(book.coverImage,'http') ? book.coverImage : pageContext.request.contextPath.concat('/images/books/').concat(book.coverImage).concat('?v=20261005')}"/>
                             <img src="${cImg}" alt="${book.title}"
                                  onerror="this.src='https://via.placeholder.com/260x380/1a1a2e/e8b86d?text=No+Cover'">
                         </div>

@@ -85,7 +85,7 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center gap-3">
-                                            <img src="${pageContext.request.contextPath}/images/books/${item.book.coverImage}"
+                                            <img src="${pageContext.request.contextPath}/images/books/${item.book.coverImage}?v=20261005"
                                                  style="width: 50px; height: 70px; object-fit: cover; border-radius: 4px;"
                                                  alt="${item.book.title}"
                                                  onerror="this.src='https://via.placeholder.com/50x70?text=Sách'">

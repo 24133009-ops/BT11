@@ -164,7 +164,7 @@
                     <div class="order-items-scroll mb-3" style="max-height: 320px; overflow-y: auto;">
                         <c:forEach var="item" items="${sessionScope.cart.items}">
                             <div class="order-summary-item">
-                                <img src="${pageContext.request.contextPath}/images/books/${item.book.coverImage}"
+                                <img src="${pageContext.request.contextPath}/images/books/${item.book.coverImage}?v=20261005"
                                      class="order-summary-img" alt="${item.book.title}"
                                      onerror="this.src='https://via.placeholder.com/50x70?text=Sách'">
                                 <div class="flex-grow-1">

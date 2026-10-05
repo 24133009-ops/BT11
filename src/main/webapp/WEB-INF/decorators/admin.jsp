@@ -61,7 +61,7 @@
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item me-3 text-light">
                         <i class="bi bi-person-fill text-warning me-1"></i>
-                        Xin chào, <strong>${sessionScope.user != null ? sessionScope.user.fullname : 'Admin'}</strong>
+                        Xin chào, <strong>Trương Quốc Duy (Admin)</strong>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/logout">

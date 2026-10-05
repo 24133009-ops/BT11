@@ -218,7 +218,7 @@
                     <div class="order-card-body">
                         <c:forEach var="item" items="${ord.orderItems}">
                             <div class="order-item-row">
-                                <img src="${pageContext.request.contextPath}/images/books/${item.book.coverImage}"
+                                <img src="${pageContext.request.contextPath}/images/books/${item.book.coverImage}?v=20261005"
                                      class="order-book-thumb" alt="${item.book.title}"
                                      onerror="this.src='https://via.placeholder.com/55x75?text=Sách'">
                                 <div class="flex-grow-1">

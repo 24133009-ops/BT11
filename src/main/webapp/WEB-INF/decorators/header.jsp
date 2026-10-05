@@ -49,10 +49,14 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="bi bi-person-circle me-1"></i>
-                                <strong>${sessionScope.user.fullname != null ? sessionScope.user.fullname : sessionScope.user.email}</strong>
-                                <c:if test="${sessionScope.user.isAdmin}">
-                                    <span class="badge bg-danger ms-1">Admin</span>
-                                </c:if>
+                                <c:choose>
+                                    <c:when test="${sessionScope.user.isAdmin}">
+                                        <strong>Trương Quốc Duy (Admin)</strong>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <strong>${sessionScope.user.fullname != null ? sessionScope.user.fullname : sessionScope.user.email}</strong>
+                                    </c:otherwise>
+                                </c:choose>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders"><i class="bi bi-clock-history me-2"></i>Lịch sử đặt hàng</a></li>

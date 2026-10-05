@@ -156,7 +156,7 @@
                                         <tr class="cart-item-row">
                                             <td>
                                                 <div class="d-flex align-items-center gap-3">
-                                                    <img src="${pageContext.request.contextPath}/images/books/${item.book.coverImage}"
+                                                    <img src="${pageContext.request.contextPath}/images/books/${item.book.coverImage}?v=20261005"
                                                          alt="${item.book.title}"
                                                          class="cart-book-img"
                                                          onerror="this.src='https://via.placeholder.com/70x95?text=Sách'">

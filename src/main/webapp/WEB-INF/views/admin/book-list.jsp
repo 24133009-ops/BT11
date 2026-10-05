@@ -87,7 +87,7 @@
                                         <td>
                                             <c:choose>
                                                 <c:when test="${not empty book.coverImage}">
-                                                    <img src="${pageContext.request.contextPath}/images/books/${book.coverImage}"
+                                                    <img src="${pageContext.request.contextPath}/images/books/${book.coverImage}?v=20261005"
                                                          alt="${book.title}"
                                                          style="width:50px; height:65px; object-fit:cover;"
                                                          class="rounded"

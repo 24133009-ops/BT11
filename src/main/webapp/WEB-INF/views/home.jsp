@@ -574,7 +574,7 @@ body {
                         <c:if test="${not empty books[1]}">
                             <div class="hero-showcase-book"
                                  style="width: 140px; height: 205px; left: 30px; top: 75px; transform: rotate(-8deg); z-index: 1;">
-                                <img src="${pageContext.request.contextPath}/images/books/${books[1].coverImage}"
+                                <img src="${pageContext.request.contextPath}/images/books/${books[1].coverImage}?v=20261005"
                                      alt="${books[1].title}">
                             </div>
                         </c:if>
@@ -583,7 +583,7 @@ body {
                         <c:if test="${not empty books[2]}">
                             <div class="hero-showcase-book"
                                  style="width: 145px; height: 215px; right: 35px; top: 60px; transform: rotate(10deg); z-index: 2;">
-                                <img src="${pageContext.request.contextPath}/images/books/${books[2].coverImage}"
+                                <img src="${pageContext.request.contextPath}/images/books/${books[2].coverImage}?v=20261005"
                                      alt="${books[2].title}">
                             </div>
                         </c:if>
@@ -591,7 +591,7 @@ body {
                         <!-- Book 0 (Center Front) -->
                         <div class="hero-showcase-book"
                              style="width: 180px; height: 260px; left: 130px; top: 40px; transform: rotate(0deg); z-index: 5;">
-                            <img src="${pageContext.request.contextPath}/images/books/${books[0].coverImage}"
+                            <img src="${pageContext.request.contextPath}/images/books/${books[0].coverImage}?v=20261005"
                                  alt="${books[0].title}">
                         </div>
                     </c:if>
@@ -691,7 +691,7 @@ body {
                                 </c:choose>
 
                                 <!-- Cover Image -->
-                                <img src="${pageContext.request.contextPath}/images/books/${book.coverImage}"
+                                <img src="${pageContext.request.contextPath}/images/books/${book.coverImage}?v=20261005"
                                      class="book-cover-img"
                                      alt="${book.title}"
                                      loading="lazy"
