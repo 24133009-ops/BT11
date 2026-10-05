@@ -111,7 +111,7 @@
             margin: 0;
             padding: 0;
         }
-        .nav-links a {
+        .nav-links > li > a {
             color: rgba(255,255,255,0.75);
             text-decoration: none;
             font-size: 0.85rem;
@@ -121,8 +121,8 @@
             transition: all 0.15s;
             white-space: nowrap;
         }
-        .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
-        .nav-links a.active { color: var(--accent); }
+        .nav-links > li > a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+        .nav-links > li > a.active { color: var(--accent); }
 
         .nav-btn-login {
             background: transparent;
@@ -269,17 +269,33 @@
         }
 
         /* Dropdown */
-        .user-dropdown .dropdown-menu {
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            padding: 6px;
-            min-width: 200px;
+        .dropdown-menu {
+            background-color: #ffffff !important;
+            border: 1px solid var(--border) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+            padding: 8px !important;
         }
-        .user-dropdown .dropdown-item {
-            border-radius: 6px;
-            font-size: 0.87rem;
-            padding: 8px 14px;
+        .dropdown-menu a,
+        .dropdown-menu .dropdown-item {
+            color: #1e293b !important;
+            border-radius: 6px !important;
+            font-size: 0.87rem !important;
+            padding: 7px 12px !important;
+            transition: background 0.15s, color 0.15s;
+        }
+        .dropdown-menu .dropdown-item:hover,
+        .dropdown-menu .dropdown-item:focus {
+            color: #0f172a !important;
+            background-color: #f1f5f9 !important;
+        }
+        .dropdown-menu .dropdown-item.text-warning,
+        .dropdown-menu .dropdown-item .text-warning {
+            color: #d97706 !important;
+        }
+        .dropdown-menu .dropdown-item.text-danger,
+        .dropdown-menu .dropdown-item .text-danger {
+            color: #dc2626 !important;
         }
 
         <sitemesh:head/>
@@ -341,29 +357,29 @@
                             </a>
                         </li>
                         <li><hr class="dropdown-divider my-1"></li>
-                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đơn hàng mới">
-                            <span class="badge bg-info text-dark me-2">1</span>Đơn hàng mới
+                        <li><a class="dropdown-item py-1 text-dark" href="${pageContext.request.contextPath}/orders?status=Đơn hàng mới">
+                            <span class="badge bg-info text-dark me-2">1</span><span class="text-dark">Đơn hàng mới</span>
                         </a></li>
-                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đã xác nhận">
-                            <span class="badge bg-primary me-2">2</span>Đã xác nhận
+                        <li><a class="dropdown-item py-1 text-dark" href="${pageContext.request.contextPath}/orders?status=Đã xác nhận">
+                            <span class="badge bg-primary me-2">2</span><span class="text-dark">Đã xác nhận</span>
                         </a></li>
-                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Chuẩn bị hàng">
-                            <span class="badge bg-warning text-dark me-2">3</span>Chuẩn bị hàng
+                        <li><a class="dropdown-item py-1 text-dark" href="${pageContext.request.contextPath}/orders?status=Chuẩn bị hàng">
+                            <span class="badge bg-warning text-dark me-2">3</span><span class="text-dark">Chuẩn bị hàng</span>
                         </a></li>
-                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Vận chuyển">
-                            <span class="badge bg-warning text-dark me-2">4</span>Vận chuyển
+                        <li><a class="dropdown-item py-1 text-dark" href="${pageContext.request.contextPath}/orders?status=Vận chuyển">
+                            <span class="badge bg-warning text-dark me-2">4</span><span class="text-dark">Vận chuyển</span>
                         </a></li>
-                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Giao hàng">
-                            <span class="badge bg-success me-2">5</span>Giao hàng
+                        <li><a class="dropdown-item py-1 text-dark" href="${pageContext.request.contextPath}/orders?status=Giao hàng">
+                            <span class="badge bg-success me-2">5</span><span class="text-dark">Giao hàng</span>
                         </a></li>
-                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đã giao">
-                            <span class="badge bg-success me-2">6</span>Đã giao
+                        <li><a class="dropdown-item py-1 text-dark" href="${pageContext.request.contextPath}/orders?status=Đã giao">
+                            <span class="badge bg-success me-2">6</span><span class="text-dark">Đã giao</span>
                         </a></li>
-                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đơn hàng hủy">
-                            <span class="badge bg-danger me-2">7</span>Đơn hàng hủy
+                        <li><a class="dropdown-item py-1 text-dark" href="${pageContext.request.contextPath}/orders?status=Đơn hàng hủy">
+                            <span class="badge bg-danger me-2">7</span><span class="text-dark">Đơn hàng hủy</span>
                         </a></li>
-                        <li><a class="dropdown-item py-1" href="${pageContext.request.contextPath}/orders?status=Đơn hàng hoàn">
-                            <span class="badge bg-secondary me-2">8</span>Đơn hàng hoàn
+                        <li><a class="dropdown-item py-1 text-dark" href="${pageContext.request.contextPath}/orders?status=Đơn hàng hoàn">
+                            <span class="badge bg-secondary me-2">8</span><span class="text-dark">Đơn hàng hoàn</span>
                         </a></li>
                         <li><hr class="dropdown-divider my-2"></li>
                         <li>
@@ -392,26 +408,26 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a class="dropdown-item text-warning fw-semibold" href="${pageContext.request.contextPath}/orders">
-                                        <i class="bi bi-box-seam me-2"></i>Lịch sử đặt hàng (8 trạng thái)
+                                        <i class="bi bi-box-seam me-2"></i><span>Lịch sử đặt hàng (8 trạng thái)</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cart">
-                                        <i class="bi bi-cart3 me-2 text-info"></i>Giỏ hàng của tôi
+                                    <a class="dropdown-item text-dark" href="${pageContext.request.contextPath}/cart">
+                                        <i class="bi bi-cart3 me-2 text-info"></i><span class="text-dark">Giỏ hàng của tôi</span>
                                     </a>
                                 </li>
                                 <c:if test="${sessionScope.user.isAdmin}">
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/books">
-                                        <i class="bi bi-speedometer2 me-2 text-warning"></i>Quản lý Sách
+                                    <li><a class="dropdown-item text-dark" href="${pageContext.request.contextPath}/admin/books">
+                                        <i class="bi bi-speedometer2 me-2 text-warning"></i><span class="text-dark">Quản lý Sách</span>
                                     </a></li>
-                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/authors">
-                                        <i class="bi bi-people me-2 text-info"></i>Quản lý Tác giả
+                                    <li><a class="dropdown-item text-dark" href="${pageContext.request.contextPath}/admin/authors">
+                                        <i class="bi bi-people me-2 text-info"></i><span class="text-dark">Quản lý Tác giả</span>
                                     </a></li>
                                 </c:if>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout">
-                                    <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
+                                    <i class="bi bi-box-arrow-right me-2"></i><span>Đăng xuất</span>
                                 </a></li>
                             </ul>
                         </li>
