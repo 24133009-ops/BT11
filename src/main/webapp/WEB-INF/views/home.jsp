@@ -778,10 +778,22 @@ body {
                                     <span class="review-count-label">Review (10)</span>
                                 </div>
 
-                                <!-- Action Button -->
-                                <a href="${pageContext.request.contextPath}/book-detail?id=${book.bookId}" class="btn-card-action">
-                                    <i class="bi bi-bag-plus"></i> Xem Chi Tiết
-                                </a>
+                                <!-- Action Buttons -->
+                                <div class="d-flex gap-2">
+                                    <a href="${pageContext.request.contextPath}/book-detail?id=${book.bookId}" class="btn-card-action flex-grow-1">
+                                        <i class="bi bi-eye"></i> Xem Chi Tiết
+                                    </a>
+                                    <c:if test="${book.quantity != null && book.quantity > 0}">
+                                        <form action="${pageContext.request.contextPath}/cart" method="post" class="d-inline">
+                                            <input type="hidden" name="action" value="add"/>
+                                            <input type="hidden" name="bookId" value="${book.bookId}"/>
+                                            <input type="hidden" name="quantity" value="1"/>
+                                            <button type="submit" class="btn btn-warning" title="Thêm vào giỏ" style="padding: 10px 14px; border-radius: 8px;">
+                                                <i class="bi bi-cart-plus-fill"></i>
+                                            </button>
+                                        </form>
+                                    </c:if>
+                                </div>
                             </div>
 
                         </div>

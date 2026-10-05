@@ -32,6 +32,18 @@
             </ul>
 
             <ul class="navbar-nav ms-auto align-items-center">
+                <!-- Giỏ hàng -->
+                <li class="nav-item me-3">
+                    <a class="btn btn-outline-warning btn-sm position-relative" href="${pageContext.request.contextPath}/cart">
+                        <i class="bi bi-cart3 me-1"></i>Giỏ hàng
+                        <c:if test="${not empty sessionScope.cart && sessionScope.cart.totalQuantity > 0}">
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                ${sessionScope.cart.totalQuantity}
+                            </span>
+                        </c:if>
+                    </a>
+                </li>
+
                 <c:choose>
                     <c:when test="${not empty sessionScope.user}">
                         <li class="nav-item dropdown">
@@ -43,16 +55,23 @@
                                 </c:if>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders"><i class="bi bi-clock-history me-2"></i>Lịch sử đặt hàng</a></li>
                                 <c:if test="${sessionScope.user.isAdmin}">
+                                    <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/books"><i class="bi bi-speedometer2 me-2"></i>Quản trị sách</a></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/authors"><i class="bi bi-people me-2"></i>Quản trị tác giả</a></li>
-                                    <li><hr class="dropdown-divider"></li>
                                 </c:if>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
                             </ul>
                         </li>
                     </c:when>
                     <c:otherwise>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/orders">
+                                <i class="bi bi-clock-history me-1"></i>Đơn hàng
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/login">
                                 <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập

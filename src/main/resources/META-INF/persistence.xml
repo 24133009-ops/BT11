@@ -13,6 +13,8 @@
         <class>model.Author_24133009</class>
         <class>model.User_24133009</class>
         <class>model.Rating_24133009</class>
+        <class>model.Order_24133009</class>
+        <class>model.OrderItem_24133009</class>
 
         <properties>
             <!-- SQL Server Connection -->

@@ -69,6 +69,33 @@ CREATE TABLE rating (
 );
 GO
 
+-- 6. Table: orders
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='orders' AND xtype='U')
+CREATE TABLE orders (
+    order_id       INT PRIMARY KEY IDENTITY(1,1),
+    user_id        INT NULL FOREIGN KEY REFERENCES users(id),
+    fullname       NVARCHAR(100) NOT NULL,
+    phone          VARCHAR(20) NOT NULL,
+    address        NVARCHAR(255) NOT NULL,
+    note           NVARCHAR(500),
+    total_price    DECIMAL(12,2),
+    payment_method NVARCHAR(50) DEFAULT 'COD',
+    status         NVARCHAR(50) DEFAULT N'Đơn hàng mới',
+    order_date     DATETIME DEFAULT GETDATE()
+);
+GO
+
+-- 7. Table: order_items
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='order_items' AND xtype='U')
+CREATE TABLE order_items (
+    id        INT PRIMARY KEY IDENTITY(1,1),
+    order_id  INT NOT NULL FOREIGN KEY REFERENCES orders(order_id) ON DELETE CASCADE,
+    book_id   INT NOT NULL FOREIGN KEY REFERENCES books(bookid),
+    quantity  INT NOT NULL,
+    price     DECIMAL(10,2) NOT NULL
+);
+GO
+
 -- Alter cover_image column to support long URLs
 IF COL_LENGTH('books', 'cover_image') < 500
     ALTER TABLE books ALTER COLUMN cover_image NVARCHAR(500);
@@ -264,6 +291,48 @@ INSERT INTO rating (userid, bookid, rating, review_text) VALUES
     (2,  12, 5, N'Atomic Habits đã giúp tôi xây dựng thói quen đọc sách mỗi ngày. Hiệu quả!'),
     (3,  11, 4, N'Nhà giả kim - câu chuyện đơn giản nhưng ý nghĩa thật sâu xa về giấc mơ cuộc đời.');
 GO
+
+-- ============================================
+-- ORDERS & ORDER_ITEMS (Mẫu đủ 8 trạng thái để test)
+-- 1. Đơn hàng mới
+-- 2. Đã xác nhận
+-- 3. Chuẩn bị hàng
+-- 4. Vận chuyển
+-- 5. Giao hàng
+-- 6. Đã giao
+-- 7. Đơn hàng hủy
+-- 8. Đơn hàng hoàn
+-- ============================================
+INSERT INTO orders (user_id, fullname, phone, address, note, total_price, payment_method, status, orderDate) VALUES
+    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Giao giờ hành chính', 82000,  'COD', N'Đơn hàng mới',   GETDATE()),
+    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Gọi trước khi giao',  180000, 'COD', N'Đã xác nhận',    DATEADD(day, -1, GETDATE())),
+    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'',                    45000,  'COD', N'Chuẩn bị hàng',  DATEADD(day, -2, GETDATE())),
+    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'',                    55000,  'COD', N'Vận chuyển',     DATEADD(day, -3, GETDATE())),
+    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Giao tận tay',        60000,  'COD', N'Giao hàng',       DATEADD(day, -4, GETDATE())),
+    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Đã nhận sách tốt',   149000, 'COD', N'Đã giao',        DATEADD(day, -5, GETDATE())),
+    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Khách đổi ý',         90000,  'COD', N'Đơn hàng hủy',   DATEADD(day, -6, GETDATE())),
+    (2, N'Nguyễn Văn A', '0987654321', N'1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', N'Bị rách bìa',         79000,  'COD', N'Đơn hàng hoàn',  DATEADD(day, -7, GETDATE()));
+GO
+
+INSERT INTO order_items (order_id, book_id, quantity, price) VALUES
+    (1, 1,  1, 82000),
+    (2, 2,  2, 90000),
+    (3, 3,  1, 45000),
+    (4, 4,  1, 55000),
+    (5, 5,  1, 60000),
+    (6, 7,  1, 149000),
+    (7, 2,  1, 90000),
+    (8, 11, 1, 79000);
+GO
+
+-- HƯỚNG DẪN CẬP NHẬT TRẠNG THÁI TRONG DATABASE ĐỂ TEST:
+-- UPDATE orders SET status = N'Đã xác nhận'    WHERE order_id = 1;
+-- UPDATE orders SET status = N'Chuẩn bị hàng'  WHERE order_id = 1;
+-- UPDATE orders SET status = N'Vận chuyển'     WHERE order_id = 1;
+-- UPDATE orders SET status = N'Giao hàng'       WHERE order_id = 1;
+-- UPDATE orders SET status = N'Đã giao'        WHERE order_id = 1;
+-- UPDATE orders SET status = N'Đơn hàng hủy'   WHERE order_id = 1;
+-- UPDATE orders SET status = N'Đơn hàng hoàn'  WHERE order_id = 1;
 
 PRINT N'BookStore Database - Fahasa Data - Đã thiết lập thành công!';
 PRINT N'Sinh viên: Trương Quốc Duy - MSSV: 24133009';

@@ -425,15 +425,42 @@
                     </tbody>
                 </table>
 
-                <!-- Action buttons -->
-                <div class="action-btns">
-                    <a href="javascript:alert('Đã thêm vào giỏ hàng thành công!')" class="btn-buy-now">
-                        <i class="bi bi-bag-check-fill"></i> Mua Ngay
-                    </a>
-                    <a href="javascript:alert('Đã lưu vào danh sách yêu thích!')" class="btn-add-cart">
-                        <i class="bi bi-heart"></i> Yêu Thích
-                    </a>
-                </div>
+                <!-- Quantity & Action buttons -->
+                <c:choose>
+                    <c:when test="${book.quantity != null && book.quantity > 0}">
+                        <form action="${pageContext.request.contextPath}/cart" method="post" class="mt-3">
+                            <input type="hidden" name="action" value="add"/>
+                            <input type="hidden" name="bookId" value="${book.bookId}"/>
+
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <label class="fw-semibold text-dark">Số lượng mua:</label>
+                                <div class="input-group" style="width: 140px;">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                            onclick="var q=document.getElementById('buyQty'); if(parseInt(q.value)>1) q.value=parseInt(q.value)-1;">-</button>
+                                    <input type="number" id="buyQty" name="quantity" value="1" min="1" max="${book.quantity}"
+                                           class="form-control text-center fw-bold"/>
+                                    <button class="btn btn-outline-secondary" type="button"
+                                            onclick="var q=document.getElementById('buyQty'); if(parseInt(q.value)<${book.quantity}) q.value=parseInt(q.value)+1; else alert('Kho chỉ còn tối đa ${book.quantity} cuốn!');">+</button>
+                                </div>
+                                <small class="text-muted">(Tối đa ${book.quantity} cuốn)</small>
+                            </div>
+
+                            <div class="action-btns">
+                                <button type="submit" name="buyNow" value="true" class="btn-buy-now">
+                                    <i class="bi bi-lightning-fill"></i> Mua Ngay
+                                </button>
+                                <button type="submit" class="btn-add-cart">
+                                    <i class="bi bi-cart-plus-fill"></i> Thêm Vào Giỏ Hàng
+                                </button>
+                            </div>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="alert alert-danger mt-3">
+                            <i class="bi bi-exclamation-octagon-fill me-2"></i>Sách này hiện tại đã hết hàng!
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
